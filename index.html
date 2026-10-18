@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SSC Official Photo Resizer - 20KB to 50KB</title>
+  <script async="async" data-cfasync="false" src="https://bicea.org/21/0cd9dd8945c1b071151bccf2b0034063"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: #0b1120; color: #f8fafc; padding: 16px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
     .container { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
     h1 { font-size: 1.5rem; font-weight: 800; color: #38bdf8; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px; }
     p.sub { font-size: 0.8rem; color: #94a3b8; text-align: center; margin-bottom: 12px; }
-    .paper-ad-slot { width: 100%; min-height: 60px; background: #1e293b; border: 1px dashed #64748b; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 10px 0; padding: 6px; }
-    .ad-badge { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .ad-demo-text { font-size: 0.75rem; color: #38bdf8; font-weight: 600; }
+    .ad-container { width: 100%; min-height: 50px; display: flex; justify-content: center; align-items: center; margin: 10px 0; }
     .passport-box { width: 160px; height: 200px; border: 2px dashed #38bdf8; border-radius: 10px; background: #111827; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; margin: 12px 0; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15); }
     .passport-box:active { transform: scale(0.98); }
     .passport-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
@@ -37,8 +36,11 @@
   <div class="container">
     <h1>SSC PHOTO RESIZER</h1>
     <p class="sub">Official 20 KB – 50 KB Guarantee (CGL / CHSL / MTS)</p>
-<script async="async" data-cfasync="false" src="https://bicea.org/21/0cd9dd8945c1b071151bccf2b0034063"></script>
-<div id="container-0cd9dd8945c1b071151bccf2b0034063"></div>
+
+    <!-- Top Ad Placement -->
+    <div class="ad-container">
+      <div id="container-0cd9dd8945c1b071151bccf2b0034063"></div>
+    </div>
 
     <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
     <div class="passport-box" onclick="document.getElementById('fileInput').click()">
@@ -48,25 +50,21 @@
       </div>
       <img id="inputPreview" alt="Selected Photo">
     </div>
+
     <button class="btn btn-generate" onclick="generateSSCPhoto()">⚡ GENERATE SSC PHOTO</button>
-    <div class="paper-ad-slot">
-      <span class="ad-badge">Advertisement</span>
-      <span class="ad-demo-text">⚡ Top Coaching Notes & Free PDF Downloads</span>
+
+    <!-- Bottom Ad Placement -->
+    <div class="ad-container">
+      <div id="container-0cd9dd8945c1b071151bccf2b0034063"></div>
     </div>
+
     <div class="output-card" id="outputCard">
       <div class="specs-pill">SSC READY: 3.5cm x 4.5cm • 36.2 KB</div>
       <img id="outputImg" class="output-preview" alt="Generated Photo">
-      <div class="paper-ad-slot">
-        <span class="ad-badge">Advertisement</span>
-        <span class="ad-demo-text">💼 Apply to 50,000+ Latest Govt Vacancies</span>
-      </div>
       <button class="btn btn-download" onclick="startDownloadWithAd()">📥 Free Download (Watch Ad)</button>
-      <div class="paper-ad-slot">
-        <span class="ad-badge">Advertisement</span>
-        <span class="ad-demo-text">📢 Join SSC Official Discussion & Updates Group</span>
-      </div>
     </div>
   </div>
+
   <div class="modal-overlay" id="adModal">
     <div class="modal-box">
       <div class="timer-circle" id="countdown">5</div>
@@ -74,9 +72,11 @@
       <p>Your SSC photo is compressed to official specs. Download will begin when timer ends.</p>
     </div>
   </div>
+
   <script>
     let rawImage = null;
     let base64Output = null;
+
     function handleFileSelect(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -91,22 +91,34 @@
       };
       reader.readAsDataURL(file);
     }
+
     async function generateSSCPhoto() {
-      if (!rawImage) { alert("Please tap the passport frame to upload your photo first!"); return; }
+      if (!rawImage) { 
+        alert("Please tap the passport frame to upload your photo first!"); 
+        return; 
+      }
       const canvas = document.createElement('canvas');
-      canvas.width = 350; canvas.height = 450;
+      canvas.width = 350; 
+      canvas.height = 450;
       const ctx = canvas.getContext('2d');
       const imgRatio = rawImage.width / rawImage.height;
       const targetRatio = 350 / 450;
       let sWidth, sHeight, sx, sy;
+
       if (imgRatio > targetRatio) {
-        sHeight = rawImage.height; sWidth = rawImage.height * targetRatio;
-        sx = (rawImage.width - sWidth) / 2; sy = 0;
+        sHeight = rawImage.height; 
+        sWidth = rawImage.height * targetRatio;
+        sx = (rawImage.width - sWidth) / 2; 
+        sy = 0;
       } else {
-        sWidth = rawImage.width; sHeight = rawImage.width / targetRatio;
-        sx = 0; sy = (rawImage.height - sHeight) / 2;
+        sWidth = rawImage.width; 
+        sHeight = rawImage.width / targetRatio;
+        sx = 0; 
+        sy = (rawImage.height - sHeight) / 2;
       }
+
       ctx.drawImage(rawImage, sx, sy, sWidth, sHeight, 0, 0, 350, 450);
+
       let minQ = 0.1, maxQ = 0.95, targetQuality = 0.6;
       for (let i = 0; i < 6; i++) {
         let midQ = (minQ + maxQ) / 2;
@@ -115,6 +127,7 @@
         targetQuality = midQ;
         if (sizeKb > 42) maxQ = midQ; else minQ = midQ;
       }
+
       base64Output = canvas.toDataURL('image/jpeg', targetQuality);
       const finalSizeKb = ((base64Output.length * 0.75) / 1024).toFixed(1);
       document.getElementById('outputImg').src = base64Output;
@@ -122,6 +135,7 @@
       document.getElementById('outputCard').style.display = 'flex';
       document.getElementById('outputCard').scrollIntoView({ behavior: 'smooth' });
     }
+
     function startDownloadWithAd() {
       if (!base64Output) return;
       const modal = document.getElementById('adModal');
@@ -146,5 +160,4 @@
     }
   </script>
 </body>
-    </html>
-                                                                             
+</html>
