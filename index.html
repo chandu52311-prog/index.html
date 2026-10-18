@@ -12,7 +12,7 @@
     .container { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
     h1 { font-size: 1.5rem; font-weight: 800; color: #38bdf8; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px; }
     p.sub { font-size: 0.8rem; color: #94a3b8; text-align: center; margin-bottom: 12px; }
-    .ad-container { width: 100%; min-height: 50px; display: flex; justify-content: center; align-items: center; margin: 10px 0; }
+    .ad-container { width: 100%; min-height: 80px; display: flex; justify-content: center; align-items: center; margin: 12px 0; }
     .passport-box { width: 160px; height: 200px; border: 2px dashed #38bdf8; border-radius: 10px; background: #111827; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; margin: 12px 0; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15); }
     .passport-box:active { transform: scale(0.98); }
     .passport-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
@@ -38,11 +38,6 @@
     <h1>SSC PHOTO RESIZER</h1>
     <p class="sub">Official 20 KB – 50 KB Guarantee (CGL / CHSL / MTS)</p>
 
-    <!-- Top Native Ad -->
-    <div class="ad-container">
-      <div id="container-0cd9dd8945c1b071151bccf2b0034063"></div>
-    </div>
-
     <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
     <div class="passport-box" onclick="document.getElementById('fileInput').click()">
       <div id="uploadPrompt" style="display: flex; flex-direction: column; align-items: center;">
@@ -54,17 +49,24 @@
 
     <button class="btn btn-generate" onclick="generateSSCPhoto()">⚡ GENERATE SSC PHOTO</button>
 
+    <!-- Download Card Section -->
     <div class="output-card" id="outputCard">
       <div class="specs-pill">SSC READY: 3.5cm x 4.5cm • 36.2 KB</div>
       <img id="outputImg" class="output-preview" alt="Generated Photo">
-      <button class="btn btn-download" onclick="startDownloadWithAd()">📥 Free Download (Watch Ad)</button>
+      
+      <!-- Native Banner ad directly above Download button -->
+      <div class="ad-container">
+        <div id="container-0cd9dd8945c1b071151bccf2b0034063"></div>
+      </div>
+
+      <button class="btn btn-download" onclick="startDownloadWithAd()">📥 Download</button>
     </div>
   </div>
 
   <div class="modal-overlay" id="adModal">
     <div class="modal-box">
       <div class="timer-circle" id="countdown">5</div>
-      <h3>Sponsor Video Playing...</h3>
+      <h3>Preparing Download...</h3>
       <p>Your SSC photo is compressed to official specs. Download will begin when timer ends.</p>
     </div>
   </div>
@@ -156,7 +158,7 @@
     }
   </script>
 
-  <!-- Social Bar Ad Script (Right above </body>) -->
+  <!-- Social Bar Ad Script -->
   <script data-cfasync="false" src="https://bicea.org/14/ddc4ebb33defed1724e27a52bfaa0e8a"></script>
 </body>
 </html>
