@@ -6,7 +6,7 @@
   <title>SSC Official Photo & Signature Resizer (2026)</title>
   <meta name="description" content="Free tool to resize Photo (20-50 KB) and Signature (10-20 KB) for SSC CGL, CHSL, MTS, and GD official applications.">
   
-  <!-- Mee Google Search Console Verification Tag -->
+  <!-- Google Search Console Verification Tag -->
   <meta name="google-site-verification" content="iId_f8e82ivBzeD_5ya7rZTJa2ama4Mkf80pJc08fws" />
   
   <style>
@@ -192,7 +192,7 @@
   </div>
 
   <div class="container">
-    <!-- Tabs -->
+    <!-- Mode Tabs -->
     <div class="tab-container">
       <button class="tab-btn active" id="tabPhoto" onclick="setMode('photo')">Passport Photo (20-50 KB)</button>
       <button class="tab-btn" id="tabSign" onclick="setMode('sign')">Signature (10-20 KB)</button>
@@ -223,16 +223,16 @@
     </div>
 
     <div class="footer-text">
-      Offline Client-Side Processing • Mee photos ye server ki upload avvavu
+      Offline Client-Side Processing • Your files are never uploaded to any server
     </div>
   </div>
 
   <script>
-    let activeMode = 'photo'; // 'photo' leda 'sign'
+    let activeMode = 'photo';
     let rawImage = null;
     let base64Output = null;
 
-    // Mee Adsterra Direct Link ikkada ivvandi:
+    // Adsterra Direct Link
     const ADSTERRA_DIRECT_LINK = "https://www.profitablecpmrate.com/your-direct-link-id"; 
 
     function setMode(mode) {
@@ -276,29 +276,26 @@
 
     async function generateSSCFile() {
       if (!rawImage) { 
-        alert(activeMode === 'photo' ? "Please upload your photo first!" : "Please upload your signature first!"); 
+        alert(activeMode === 'photo' ? "Please select a passport photo first!" : "Please select a signature image first!"); 
         return; 
       }
 
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
 
-      // Official Specifications
-      // Photo: 3.5cm x 4.5cm -> 350x450 px | 20KB - 50KB
-      // Signature: 4.0cm x 2.0cm -> 400x200 px | 10KB - 20KB
+      // Dimensions & Constraints:
+      // Photo: 350x450 px | 20KB - 50KB
+      // Signature: 400x200 px | 10KB - 20KB
       const targetWidth = activeMode === 'photo' ? 350 : 400;
       const targetHeight = activeMode === 'photo' ? 450 : 200;
       const maxTargetKb = activeMode === 'photo' ? 45 : 18;
-      const minTargetKb = activeMode === 'photo' ? 25 : 12;
 
       canvas.width = targetWidth;
       canvas.height = targetHeight;
 
-      // Clean white background
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, targetWidth, targetHeight);
 
-      // Fit image properly
       const imgRatio = rawImage.width / rawImage.height;
       const targetRatio = targetWidth / targetHeight;
       let sWidth, sHeight, sx, sy;
@@ -317,7 +314,7 @@
 
       ctx.drawImage(rawImage, sx, sy, sWidth, sHeight, 0, 0, targetWidth, targetHeight);
 
-      // Quality adjustment for target KB
+      // Binary search quality adjustment
       let minQ = 0.1, maxQ = 0.98, targetQuality = 0.7;
       for (let i = 0; i < 7; i++) {
         let midQ = (minQ + maxQ) / 2;
@@ -344,16 +341,15 @@
       document.getElementById('outputCard').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Download Handler
     function handleDownload() {
       if (!base64Output) return;
 
-      // 1. Signature ayinappudu mathrame ad open avthundi:
-      if (activeMode === 'sign' && ADSTERRA_DIRECT_LINK && !ADSTERRA_DIRECT_LINK.includes("your-direct-link-id")) {
+      // Trigger ad only for signature download
+      if (activeMode === 'sign' && ADSTERRA_DIRECT_LINK) {
         window.open(ADSTERRA_DIRECT_LINK, '_blank');
       }
 
-      // 2. Direct ga file download start avthundi
+      // Download file directly
       const link = document.createElement('a');
       link.href = base64Output;
       link.download = activeMode === 'photo' 
